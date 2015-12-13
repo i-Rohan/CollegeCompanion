@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:onClick="onClickLayout">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="30dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/dp"
+                android:layout_width="150dp"
+                android:layout_height="125dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/User"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/ll1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="75dp"
+                android:text="Welcome"
+                android:id="@+id/textView"
+                android:gravity="center"
+                android:textColor="#33b5e5"
+                android:textSize="35sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/attendance"
+                android:src="@drawable/attendance_ldpi"
+                android:onClick="onAttendanceClick" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/timetable"
+                android:src="@drawable/timetable_ldpi"
+                android:layout_marginLeft="110dp"
+                android:onClick="onTimeTableClick" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Attendance\nManagement"
+                android:id="@+id/textView2"
+                android:textColor="#FF6C08"
+                android:gravity="center"
+                android:onClick="onAttendanceClick" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Time Table"
+                android:id="@+id/textView3"
+                android:textColor="#FF2600"
+                android:layout_marginLeft="75dp"
+                android:gravity="center"
+                android:onClick="onTimeTableClick" />
+
+        </LinearLayout>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/logout"
+            android:layout_width="196dp"
+            android:layout_height="64dp"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:cpb_textIdle="Logout"
+            android:layout_gravity="center_horizontal"
+            app:cpb_cornerRadius="48dp"
+            android:layout_marginTop="50dp"/>
+
+    </LinearLayout>
+</ScrollView>
+

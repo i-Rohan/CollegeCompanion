@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply from: 'maven.gradle'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+    }
+
+    buildTypes {
+        debug {
+            zipAlignEnabled false
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'LICENSE.txt'
+    }
+
+    dexcount {
+        includeClasses = true
+        includeFieldCount = true
+        printAsTree = true
+        orderByMethodCount = false
+        verbose = false
+    }
+}
+
+dependencies {
+    //Libraries
+    def libraryDependencies = rootProject.ext.libraryDependencies
+    compile libraryDependencies.annotationsVersion
+    compile libraryDependencies.supportV4
+}
+
+uploadArchives.dependsOn(assemble)
+
+
+
