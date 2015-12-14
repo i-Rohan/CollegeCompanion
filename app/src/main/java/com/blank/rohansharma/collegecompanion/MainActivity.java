@@ -135,7 +135,6 @@ public class MainActivity extends Activity
             }
         });
 
-        //TODO
         Context context = this.getApplicationContext();
         if(soundProfile!= null)
             soundProfile.SetAlarm(context);

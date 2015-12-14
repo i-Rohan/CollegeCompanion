@@ -18,9 +18,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class AttendanceActivityT extends AppCompatActivity
 {
@@ -129,8 +127,8 @@ public class AttendanceActivityT extends AppCompatActivity
 
         int osApi=android.os.Build.VERSION.SDK_INT;
         boolean thread,a=true,wifi;
-        SQLiteDatabase Attendance;
-        public String currentDateTimeString;
+        //SQLiteDatabase Attendance;
+        //public String currentDateTimeString;
 
         public FragmentTakeAttendance() {
         }
@@ -153,12 +151,12 @@ public class AttendanceActivityT extends AppCompatActivity
                 {
                     if(a)
                     {
-                        currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date()).replaceAll(" ","_");
+                        /*currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date()).replaceAll(" ","_");
                         currentDateTimeString=currentDateTimeString.replaceAll(",", "");
                         currentDateTimeString=currentDateTimeString.replaceAll(":","_");
                         Attendance=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/attendance", null, SQLiteDatabase.OPEN_READWRITE);
                         Attendance.execSQL("ALTER TABLE record ADD COLUMN "+currentDateTimeString+" CHAR");
-                        //Attendance.execSQL("UPDATE record SET "+currentDateTimeString+"='A'");
+                        Attendance.execSQL("UPDATE record SET "+currentDateTimeString+"='A'");*/
                         a=false;
                         take.setText("Done");
                         taking.setVisibility(View.VISIBLE);
@@ -253,7 +251,7 @@ public class AttendanceActivityT extends AppCompatActivity
 
     public static class FragmentAttendanceRecord extends Fragment
     {
-        TextView text,t1,t2,t3,t4,t5,t6;
+        //TextView text,t1,t2,t3,t4,t5,t6;
 
         public FragmentAttendanceRecord()
         {

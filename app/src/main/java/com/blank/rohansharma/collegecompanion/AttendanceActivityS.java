@@ -167,7 +167,7 @@ public class AttendanceActivityS extends AppCompatActivity
 
     public static class FragmentAttendanceRecord extends Fragment
     {
-        public FragmentAttendanceRecord()
+                public FragmentAttendanceRecord()
         {
 
         }
