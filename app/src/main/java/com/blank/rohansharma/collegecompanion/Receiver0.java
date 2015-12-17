@@ -144,7 +144,7 @@ public class Receiver0 extends BroadcastReceiver
             AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             Intent i = new Intent("changeProfileToNormal");
             PendingIntent pi = PendingIntent.getBroadcast(context,1, i,0);
-            Log.d("abc", "Loda");
+            Log.d("abc", "Alarm");
             am.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 1000 * 15, pi);
             /*PugNotification.with(context)
                 .load()

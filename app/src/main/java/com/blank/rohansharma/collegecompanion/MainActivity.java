@@ -129,7 +129,7 @@ public class MainActivity extends Activity
                 pi = PendingIntent.getBroadcast(MainActivity.this, 1, intent, 0);
                 AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 am.cancel(pi);
-                Log.d("abc", "End Loda");
+                Log.d("abc", "End Alarm");
                 startLoginActivity();
                 finish();
             }
