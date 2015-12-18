@@ -7,8 +7,7 @@ import android.media.AudioManager;
 import android.util.Log;
 
 public class ReceiverChangeProfile extends BroadcastReceiver {
-    public ReceiverChangeProfile() {
-    }
+    public ReceiverChangeProfile() {}
 
     @Override
     public void onReceive(Context context, Intent intent)

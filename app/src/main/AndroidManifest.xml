@@ -85,5 +85,4 @@
                 android:value="com.blank.rohansharma.collegecompanion.MainActivity" />
         </activity>
     </application>
-
 </manifest>
