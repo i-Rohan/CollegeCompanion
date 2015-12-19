@@ -114,7 +114,7 @@ public class MyReceiver extends BroadcastReceiver
     {
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, MyReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
         /*SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String time = sdf.format(new Date());
         long t;
