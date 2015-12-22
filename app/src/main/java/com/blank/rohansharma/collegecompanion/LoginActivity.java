@@ -45,7 +45,7 @@ public class LoginActivity extends Activity
     private ProgressDialog pDialog;
     SQLiteDatabase Database,Loggedin;
     boolean login;
-    public static String[] file_url = {"http://10.7.1.125:8080/CollegeCompanion/login","login"};
+    public static String[] file_url = {"http://10.7.1.125/collegecompanion/login","login"};
     CheckBox checkbox;
     File del;
 
@@ -278,7 +278,8 @@ public class LoginActivity extends Activity
                 output.close();
                 input.close();
 
-                if(osApi>=21) {
+                if(osApi>=21)
+                {
                     InputStream in = null;
                     OutputStream out = null;
                     String outPath = "/data/data/com.blank.rohansharma.collegecompanion/databases/";
