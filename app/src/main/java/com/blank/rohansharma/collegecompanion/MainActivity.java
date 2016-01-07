@@ -43,7 +43,7 @@ public class MainActivity extends Activity
     ProgressDialog pDialog;
     TextView u;
     Button Logout;
-    String[] file_url={"http://10.7.1.125:8080/CollegeCompanion/timetable","timetable"};
+    String[] file_url={"http://10.7.1.125/collegecompanion/timetable","timetable"};
     SQLiteDatabase Loggedin;
     String SorT;
     ImageView dp;
