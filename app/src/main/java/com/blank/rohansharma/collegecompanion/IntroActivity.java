@@ -26,9 +26,9 @@ public class IntroActivity extends AppIntro
     @Override
     public void init(Bundle savedInstanceState)
     {
-        addSlide(AppIntroFragment.newInstance("Welcome to College Companion", "Attendance and time table management made simple", R.drawable.graduation, Color.parseColor("#222222")));
-        addSlide(AppIntroFragment.newInstance("Attendance Management", "Students can mark their attendance via their smart phone. Also they can check their attendance record at any time", R.drawable.attendance, Color.parseColor("#FFA500")));
-        addSlide(AppIntroFragment.newInstance("Time Table Management","The time table will be downloaded from server and the app will notify 15 minutes before every class. And also the app will switch to 'Vibrate Only' mode during class hours",R.drawable.timetable,Color.parseColor("#5B6BC0")));
+        addSlide(AppIntroFragment.newInstance("Welcome to College Companion", "Time Table management made simple", R.drawable.graduation, Color.parseColor("#222222")));
+        //addSlide(AppIntroFragment.newInstance("Attendance Management", "Students can mark their attendance via their smart phone. Also they can check their attendance record at any time", R.drawable.attendance, Color.parseColor("#FFA500")));
+        addSlide(AppIntroFragment.newInstance("Time Table Management","The Time Table will be downloaded from server and the app will switch to 'Vibrate Only' mode during class hours",R.drawable.timetable,Color.parseColor("#5B6BC0")));
         addSlide(AppIntroFragment.newInstance("All done!","You are all set to go!",R.drawable.correct,Color.parseColor("#01B8FC")));
         //setBarColor(Color.parseColor("#3F51B5"));
         // setSeparatorColor(Color.parseColor("#d3d3d3"));

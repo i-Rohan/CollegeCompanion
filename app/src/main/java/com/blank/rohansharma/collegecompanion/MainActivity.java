@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -40,12 +42,13 @@ import java.net.URLConnection;
 
 public class MainActivity extends Activity
 {
+    Boolean update=false;
     ProgressDialog pDialog;
     TextView u;
-    Button Logout;
+    Button Logout,update1;
     String[] file_url={"http://10.7.1.125/collegecompanion/timetable","timetable"};
-    SQLiteDatabase Loggedin;
-    String SorT;
+    SQLiteDatabase Loggedin,Update;
+    String SorT,version;
     ImageView dp;
     File f = new File("/data/data/com.blank.rohansharma.collegecompanion/images");
     Bitmap bmp;
@@ -60,9 +63,24 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        update1=(Button)findViewById(R.id.update);
+
+        PackageInfo pInfo = null;
+        try
+        {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        version = pInfo.versionName;
+
+        new DownloadFileFromURL().execute(new String[]{"http://10.7.1.125/collegecompanion/timetable", "timetable"});
+
         if(!f.exists())
             f.mkdir();
-        f = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
+        f=new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
         dp=(ImageView)findViewById(R.id.dp);
         if(f.exists())
         {
@@ -93,7 +111,8 @@ public class MainActivity extends Activity
         Cursor c=Loggedin.rawQuery("SELECT * FROM user",null);
         c.moveToFirst();
         u=(TextView)findViewById(R.id.User);
-        u.setText(c.getString(0));
+        u.setText(c.getString(0).toUpperCase());
+        u.setText(version);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         String inputString = "09:30:00";
@@ -218,6 +237,13 @@ public class MainActivity extends Activity
         });*/
     }
 
+    public void onClickUpdate(View v)
+    {
+        Uri uri = Uri.parse("https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
@@ -237,7 +263,8 @@ public class MainActivity extends Activity
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Choose Picture"), 1);
         }
-        else if(item.getTitle()=="Remove and set to default") {
+        else if(item.getTitle()=="Remove and set to default")
+        {
             dp.setImageDrawable(getResources().getDrawable(R.drawable.flatface));
             f = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
             if(f.exists())
@@ -409,6 +436,29 @@ public class MainActivity extends Activity
                 Log.d("DOWNLOAD", "Error Downloading!");
             }
             return null;
+        }
+
+        /**
+         * After completing background task
+         * Dismiss the progress dialog
+         * **/
+        @Override
+        protected void onPostExecute(String file_url)
+        {
+            File f=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/update");
+            if(f.exists())
+            {
+                Update=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/update",null,SQLiteDatabase.OPEN_READONLY);
+                Cursor c=Update.rawQuery("SELECT * FROM version", null);
+                c.moveToFirst();
+                String s=c.getString(0);
+                if(s.compareTo(version)>0)
+                {
+                    update=true;
+                    update1.setVisibility(View.VISIBLE);
+                }
+                c.close();
+            }
         }
     }
 }

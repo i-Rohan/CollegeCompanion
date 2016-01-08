@@ -56,7 +56,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="25dp">
 
             <ImageView
                 android:layout_width="50dp"
@@ -104,6 +104,25 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The app will automatically switch your phone to &apos;Vibrate&apos; mode during class hors and back to normal mode when there&apos;s no class"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App Update Available!"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:onClick="onClickUpdate"
+            android:textColor="#00ff00"
+            android:visibility="gone"
+            android:id="@+id/update" />
+
         <com.dd.CircularProgressButton
             android:id="@+id/logout"
             android:layout_width="196dp"
@@ -113,7 +132,7 @@
             app:cpb_textIdle="Logout"
             android:layout_gravity="center_horizontal"
             app:cpb_cornerRadius="48dp"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 </ScrollView>
