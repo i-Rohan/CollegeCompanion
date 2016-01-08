@@ -47,6 +47,7 @@ public class MainActivity extends Activity
     TextView u;
     Button Logout,update1;
     String[] file_url={"http://10.7.1.125/collegecompanion/timetable","timetable"};
+    String[] file_url_update={"http://10.7.1.125/collegecompanion/update","update"};
     SQLiteDatabase Loggedin,Update;
     String SorT,version;
     ImageView dp;
@@ -76,7 +77,7 @@ public class MainActivity extends Activity
         }
         version = pInfo.versionName;
 
-        new DownloadFileFromURL().execute(new String[]{"http://10.7.1.125/collegecompanion/timetable", "timetable"});
+        new DownloadFileFromURL().execute(file_url_update);
 
         if(!f.exists())
             f.mkdir();
@@ -112,7 +113,6 @@ public class MainActivity extends Activity
         c.moveToFirst();
         u=(TextView)findViewById(R.id.User);
         u.setText(c.getString(0).toUpperCase());
-        u.setText(version);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         String inputString = "09:30:00";
@@ -451,13 +451,13 @@ public class MainActivity extends Activity
                 Update=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/update",null,SQLiteDatabase.OPEN_READONLY);
                 Cursor c=Update.rawQuery("SELECT * FROM version", null);
                 c.moveToFirst();
-                String s=c.getString(0);
-                if(s.compareTo(version)>0)
+                if(c.getString(0).compareTo(version)==0)
                 {
                     update=true;
                     update1.setVisibility(View.VISIBLE);
                 }
                 c.close();
+                Update.close();
             }
         }
     }
