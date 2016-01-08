@@ -113,15 +113,15 @@
             android:gravity="center" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="App Update Available!"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:onClick="onClickUpdate"
-            android:textColor="#00ff00"
             android:visibility="gone"
-            android:id="@+id/update" />
+            android:id="@+id/update"
+            android:background="#00ff00" />
 
         <com.dd.CircularProgressButton
             android:id="@+id/logout"

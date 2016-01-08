@@ -45,15 +45,17 @@ public class MainActivity extends Activity
     Boolean update=false;
     ProgressDialog pDialog;
     TextView u;
-    Button Logout,update1;
+    Button Logout;
+    Button update1;
     String[] file_url={"http://10.7.1.125/collegecompanion/timetable","timetable"};
     String[] file_url_update={"http://10.7.1.125/collegecompanion/update","update"};
-    SQLiteDatabase Loggedin,Update;
+    SQLiteDatabase Loggedin;
+    SQLiteDatabase Update;
     String SorT,version;
     ImageView dp;
     File f = new File("/data/data/com.blank.rohansharma.collegecompanion/images");
     Bitmap bmp;
-    //public static String customIntent="changeProfileToNormal";
+    //public  String customIntent="changeProfileToNormal";
     Intent intent;
     PendingIntent pi;
     int osApi=android.os.Build.VERSION.SDK_INT;
@@ -375,6 +377,21 @@ public class MainActivity extends Activity
         }
     }
 
+    public  void updateApp()
+    {
+        File f=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/update");
+        if(f.exists())
+        {
+            Update=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/update",null,SQLiteDatabase.OPEN_READONLY);
+            Cursor c=Update.rawQuery("SELECT * FROM version", null);
+            c.moveToFirst();
+            if(c.getString(0).compareTo(version)>0)
+                update1.setVisibility(View.VISIBLE);
+            c.close();
+            Update.close();
+        }
+    }
+
     /**
      * Background Async Task to download file
      * */
@@ -445,20 +462,7 @@ public class MainActivity extends Activity
         @Override
         protected void onPostExecute(String file_url)
         {
-            File f=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/update");
-            if(f.exists())
-            {
-                Update=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/update",null,SQLiteDatabase.OPEN_READONLY);
-                Cursor c=Update.rawQuery("SELECT * FROM version", null);
-                c.moveToFirst();
-                if(c.getString(0).compareTo(version)==0)
-                {
-                    update=true;
-                    update1.setVisibility(View.VISIBLE);
-                }
-                c.close();
-                Update.close();
-            }
+            updateApp();
         }
     }
 }
