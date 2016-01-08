@@ -33,13 +33,13 @@ public class ReceiverChangeProfile extends BroadcastReceiver {
             case 0:
                 Log.i("Sound Profile", "Vibrate Mode");
                 am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-                am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+                //am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
                 break;
             case 1:
                 Log.i("Sound Profile", "Normal Mode");
                 am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                 am.setStreamVolume(AudioManager.STREAM_RING, am.getStreamMaxVolume(AudioManager.STREAM_RING), 0);
-                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 2, 0);
+                //am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 2, 0);
         }
     }
 }
