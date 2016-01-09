@@ -356,6 +356,23 @@ public class MainActivity extends Activity
         startActivity(i);   //start timetable activity
     }
 
+    public void onClickBug(View v)
+    {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","racy.rohan@gmail.com", null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "College Companion Suggestion or Bug");
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+    }
+
+    public void onClickShare(View v)
+    {
+        String shareBody = "https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing";
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "College Comapnion.apk\n");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(sharingIntent);
+    }
+
     /**
      * Showing Dialog
      * */
