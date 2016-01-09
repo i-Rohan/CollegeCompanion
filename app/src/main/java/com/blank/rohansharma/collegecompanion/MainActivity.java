@@ -365,12 +365,17 @@ public class MainActivity extends Activity
 
     public void onClickShare(View v)
     {
-        String shareBody = "https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing";
+        String message = "https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing\n\nor\n\nhttp://10.7.1.125/a/College%20Companion.apk";
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, message);
+        startActivity(Intent.createChooser(share, "Select App\nI suggest WhatsApp or Gmail"));
+        /*String shareBody = "https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing\n\nor\n\nhttp://10.7.1.125/a/College%20Companion.apk";
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "College Comapnion.apk\n");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(sharingIntent);
+        startActivity(sharingIntent);*/
     }
 
     /**

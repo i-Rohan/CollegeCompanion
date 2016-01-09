@@ -12,20 +12,35 @@
         android:weightSum="1"
         android:onClick="onClickLayout">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageView"
-            android:layout_gravity="right"
-            android:src="@drawable/share"
-            android:onClick="onClickShare" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|right"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/share"
+                android:onClick="onClickShare"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Share App\nLink"
+                android:textSize="8dp"
+                android:layout_marginRight="11dp"
+                android:onClick="onClickShare" />
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="30dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,14 +48,14 @@
                 android:layout_width="150dp"
                 android:layout_height="125dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/User"
-                android:gravity="center" />
-
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/User"
+            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -111,14 +126,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="The app will automatically switch your phone to &apos;Vibrate&apos; mode during class hours and back to normal mode when there&apos;s no class"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:gravity="center" />
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,19 +147,25 @@
             app:cpb_textIdle="Logout"
             android:layout_gravity="center_horizontal"
             app:cpb_cornerRadius="48dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="25dp" />
 
-        <Button
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/email"
+            android:layout_marginTop="25dp"
+            android:onClick="onClickBug" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suggestion or Bug?\nEmail Me"
-            android:id="@+id/button"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Suggestion or Bug?\nSend me an Email"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickBug"
-            android:layout_marginTop="10dp"
-            android:background="#33b5e5"
-            android:textColor="#ffffff"
-            android:layout_marginBottom="25dp" />
+            android:gravity="center"
+            android:onClick="onClickBug" />
 
     </LinearLayout>
 </ScrollView>
