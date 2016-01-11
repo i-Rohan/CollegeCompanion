@@ -399,12 +399,32 @@ public class MainActivity extends Activity
         }
     }
 
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        String update_file_name;
+        if(osApi>=21)
+            update_file_name="/data/data/com.blank.rohansharma.collegecompanion/databases/update";
+        else
+            update_file_name="/sdcard/update";
+        File tmp=new File(update_file_name);
+
+        if(tmp.exists())
+            tmp.delete();
+    }
+
     public  void updateApp()
     {
-        File f=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/update");
-        if(f.exists())
+        String update_file_name;
+        if(osApi>=21)
+            update_file_name="/data/data/com.blank.rohansharma.collegecompanion/databases/update";
+        else
+            update_file_name="/sdcard/update";
+        File tmp=new File(update_file_name);
+        if(tmp.exists())
         {
-            Update=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/update",null,SQLiteDatabase.OPEN_READONLY);
+            Update=SQLiteDatabase.openDatabase(update_file_name,null,SQLiteDatabase.OPEN_READONLY);
             Cursor c=Update.rawQuery("SELECT * FROM version", null);
             c.moveToFirst();
             if(c.getString(0).compareTo(version)>0)
