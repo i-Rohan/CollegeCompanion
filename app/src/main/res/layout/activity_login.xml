@@ -96,6 +96,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="CSE+CSC      cse2"
+            android:layout_gravity="center_horizontal"
+            android:autoText="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="CSC                csc"
             android:layout_gravity="center_horizontal"
             android:autoText="false"
