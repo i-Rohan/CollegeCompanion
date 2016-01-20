@@ -78,7 +78,9 @@ public class MyReceiver extends BroadcastReceiver
                 p = "p7";
             else if (time.compareTo("16:30:00") >= 0 && time.compareTo("17:30:00") <= -1)
                 p = "p8";
-            if (p != null)
+            else if(time.compareTo("17:30:00") >= 0 && time.compareTo("17:45:00") <= -1)
+                p="blah";
+            if (p != null&&p.compareTo("blah")!=0)
             {
                 Cursor c0=Stream.rawQuery("SELECT * FROM user",null);
                 c0.moveToFirst();
@@ -97,12 +99,19 @@ public class MyReceiver extends BroadcastReceiver
                     //Toast.makeText(context,"Normal Mode", Toast.LENGTH_SHORT).show();
                 }
                 c.close();
-            } else
+            }
+            else if(p.compareTo("blah")==0)
             {
                 changeProfile(context,1);
                 Log.d("SoundProfile", "Profile changed");
                 //Toast.makeText(context,"Normal Mode", Toast.LENGTH_SHORT).show();
             }
+            /*else
+            {
+                changeProfile(context, 1);
+                Log.d("SoundProfile", "Profile changed");
+                //Toast.makeText(context,"Normal Mode", Toast.LENGTH_SHORT).show();
+            }*/
             TimeTable.close();
 
             //Release the lock
