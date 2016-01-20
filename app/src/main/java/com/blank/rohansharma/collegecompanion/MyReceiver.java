@@ -19,12 +19,13 @@ import java.util.Date;
 public class MyReceiver extends BroadcastReceiver
 {
     public static String customIntent="changeProfileToNormal";
+    String p = " ";
 
     @Override
     public void onReceive(Context context, Intent intent)
     {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"MyReceiver");
         //Acquire the lock
         wl.acquire();
         File tmp = new File("/data/data/com.blank.rohansharma.collegecompanion/databases/timetable");
@@ -59,7 +60,6 @@ public class MyReceiver extends BroadcastReceiver
                     Day = "Saturday";
                     break;
             }
-            String p = null;
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             String time = sdf.format(new Date());
             if (time.compareTo("09:30:00") >= 0 && time.compareTo("10:30:00") == -1)
@@ -80,7 +80,7 @@ public class MyReceiver extends BroadcastReceiver
                 p = "p8";
             else if(time.compareTo("17:30:00") >= 0 && time.compareTo("17:45:00") <= -1)
                 p="blah";
-            if (p != null&&p.compareTo("blah")!=0)
+            if (p.compareTo(" ")!=0&&p.compareTo("blah")!=0)
             {
                 Cursor c0=Stream.rawQuery("SELECT * FROM user",null);
                 c0.moveToFirst();
@@ -105,6 +105,10 @@ public class MyReceiver extends BroadcastReceiver
                 changeProfile(context,1);
                 Log.d("SoundProfile", "Profile changed");
                 //Toast.makeText(context,"Normal Mode", Toast.LENGTH_SHORT).show();
+            }
+            else if(p.compareTo(" ")==0)
+            {
+                Log.d("Alarm", "Running");
             }
             /*else
             {

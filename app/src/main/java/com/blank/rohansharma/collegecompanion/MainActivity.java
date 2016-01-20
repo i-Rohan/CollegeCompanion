@@ -79,8 +79,6 @@ public class MainActivity extends Activity
         }
         version = pInfo.versionName;
 
-        new DownloadFileFromURL().execute(file_url_update);
-
         if(!f.exists())
             f.mkdir();
         f=new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
@@ -94,12 +92,11 @@ public class MainActivity extends Activity
             dp.setImageDrawable(getResources().getDrawable(R.drawable.flatface));
         registerForContextMenu(dp);
 
-        f=new File("/data/data/com.blank.rohansharma.collegecompanion/timetable");
+        /*f=new File("/data/data/com.blank.rohansharma.collegecompanion/timetable");
         if(!f.exists())
-            f.mkdir();
+            f.mkdir();*/
 
-        MyReceiver soundProfile;
-        soundProfile=new MyReceiver();
+        MyReceiver soundProfile=new MyReceiver();
 
         /*intent = new Intent("abc");
         pi = PendingIntent.getBroadcast(this, 0, intent, 0);
@@ -108,7 +105,10 @@ public class MainActivity extends Activity
 
         final WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
         if(wifiManager.isWifiEnabled())
+        {
             new DownloadFileFromURL().execute(file_url);
+            new DownloadFileFromURL().execute(file_url_update);
+        }
 
         Loggedin=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/loggedin",null,SQLiteDatabase.OPEN_READONLY);
         Cursor c=Loggedin.rawQuery("SELECT * FROM user",null);
@@ -156,9 +156,8 @@ public class MainActivity extends Activity
             }
         });
 
-        Context context = this.getApplicationContext();
         if(soundProfile!= null)
-            soundProfile.SetAlarm(context);
+            soundProfile.SetAlarm(MainActivity.this);
 
         /*t=new Thread(new Runnable()
         {
