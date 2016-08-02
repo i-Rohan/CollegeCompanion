@@ -1,7 +1,6 @@
 package com.blank.rohansharma.collegecompanion;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.dd.CircularProgressButton;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -40,55 +38,47 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MainActivity extends Activity
-{
-    Boolean update=false;
+public class MainActivity extends Activity {
+    Boolean update = false;
     ProgressDialog pDialog;
     TextView u;
-    Button Logout;
     Button update1;
-    String[] file_url={"http://10.7.1.125/collegecompanion/timetable","timetable"};
-    String[] file_url_update={"http://10.7.1.125/collegecompanion/update","update"};
+    String[] file_url = {"http://10.7.1.125/collegecompanion/timetable", "timetable"};
+    String[] file_url_update = {"http://10.7.1.125/collegecompanion/update", "update"};
     SQLiteDatabase Loggedin;
     SQLiteDatabase Update;
-    String SorT,version;
+    String SorT, version;
     ImageView dp;
     File f = new File("/data/data/com.blank.rohansharma.collegecompanion/images");
     Bitmap bmp;
     //public  String customIntent="changeProfileToNormal";
     Intent intent;
     PendingIntent pi;
-    int osApi=android.os.Build.VERSION.SDK_INT;
+    int osApi = android.os.Build.VERSION.SDK_INT;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        update1=(Button)findViewById(R.id.update);
+        update1 = (Button) findViewById(R.id.update);
 
         PackageInfo pInfo = null;
-        try
-        {
+        try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
+        } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         version = pInfo.versionName;
 
-        if(!f.exists())
+        if (!f.exists())
             f.mkdir();
-        f=new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
-        dp=(ImageView)findViewById(R.id.dp);
-        if(f.exists())
-        {
-            bmp= BitmapFactory.decodeFile("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
+        f = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
+        dp = (ImageView) findViewById(R.id.dp);
+        if (f.exists()) {
+            bmp = BitmapFactory.decodeFile("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
             dp.setImageBitmap(bmp);
-        }
-        else
+        } else
             dp.setImageDrawable(getResources().getDrawable(R.drawable.flatface));
         registerForContextMenu(dp);
 
@@ -96,7 +86,7 @@ public class MainActivity extends Activity
         if(!f.exists())
             f.mkdir();*/
 
-        MyReceiver soundProfile=new MyReceiver();
+        MyReceiver soundProfile = new MyReceiver();
 
         /*intent = new Intent("abc");
         pi = PendingIntent.getBroadcast(this, 0, intent, 0);
@@ -104,16 +94,15 @@ public class MainActivity extends Activity
         am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pi);*/
 
         final WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-        if(wifiManager.isWifiEnabled())
-        {
+        if (wifiManager.isWifiEnabled()) {
             new DownloadFileFromURL().execute(file_url);
             new DownloadFileFromURL().execute(file_url_update);
         }
 
-        Loggedin=SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/loggedin",null,SQLiteDatabase.OPEN_READONLY);
-        Cursor c=Loggedin.rawQuery("SELECT * FROM user",null);
+        Loggedin = SQLiteDatabase.openDatabase("/data/data/com.blank.rohansharma.collegecompanion/databases/loggedin", null, SQLiteDatabase.OPEN_READONLY);
+        Cursor c = Loggedin.rawQuery("SELECT * FROM user", null);
         c.moveToFirst();
-        u=(TextView)findViewById(R.id.User);
+        u = (TextView) findViewById(R.id.User);
         u.setText(c.getString(0).toUpperCase());
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -126,37 +115,11 @@ public class MainActivity extends Activity
             e.printStackTrace();
         }
         u.setText(String.valueOf(date.getTime()));*/
-        SorT=c.getString(1);
+        SorT = c.getString(1);
         c.close();
         Loggedin.close();
 
-        Logout=(CircularProgressButton)findViewById(R.id.logout);
-        Logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                File file=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/loggedin");
-                file.delete();
-                file= new File("/data/data/com.blank.rohansharma.collegecompanion/databases/timetable");
-                file.delete();
-                file = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
-                file.delete();
-                file=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/attendance");
-                file.delete();
-                file=new File("/data/data/com.blank.rohansharma.collegecompanion/databases/studentinfo");
-                file.delete();
-                intent = new Intent("abc");
-                pi = PendingIntent.getBroadcast(MainActivity.this, 1, intent, 0);
-                AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                am.cancel(pi);
-                Log.d("abc", "End Alarm");
-                startLoginActivity();
-                finish();
-            }
-        });
-
-        if(soundProfile!= null)
+        if (soundProfile != null)
             soundProfile.SetAlarm(MainActivity.this);
 
         /*t=new Thread(new Runnable()
@@ -238,16 +201,14 @@ public class MainActivity extends Activity
         });*/
     }
 
-    public void onClickUpdate(View v)
-    {
+    public void onClickUpdate(View v) {
         Uri uri = Uri.parse("https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-    {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(null);
         menu.add(0, v.getId(), 0, "Change");//groupId, itemId, order, title
@@ -255,23 +216,18 @@ public class MainActivity extends Activity
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-        if(item.getTitle()=="Change")
-        {
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle() == "Change") {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Choose Picture"), 1);
-        }
-        else if(item.getTitle()=="Remove and set to default")
-        {
+        } else if (item.getTitle() == "Remove and set to default") {
             dp.setImageDrawable(getResources().getDrawable(R.drawable.flatface));
             f = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
-            if(f.exists())
+            if (f.exists())
                 f.delete();
-        }
-        else
+        } else
             return false;
         return true;
     }
@@ -295,18 +251,14 @@ public class MainActivity extends Activity
     }*/
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if(resultCode==RESULT_CANCELED)
-        {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_CANCELED) {
             // action cancelled
         }
-        if(resultCode==RESULT_OK)
-        {
+        if (resultCode == RESULT_OK) {
             Uri selectedimg = data.getData();
-            try
-            {
-                bmp=MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedimg);
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedimg);
                 dp.setImageBitmap(bmp);
                 try {
                     f = new File("/data/data/com.blank.rohansharma.collegecompanion/images/dp.jpg");
@@ -314,10 +266,9 @@ public class MainActivity extends Activity
                     bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
                     out.flush();
                     out.close();
-                } catch(Exception e) {}
-            }
-            catch (IOException e)
-            {
+                } catch (Exception e) {
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -337,13 +288,10 @@ public class MainActivity extends Activity
 
     public void onAttendanceClick(View v)   //o attendance button click
     {
-        if(SorT.compareTo("S")==0)
-        {
+        if (SorT.compareTo("S") == 0) {
             Intent i = new Intent(MainActivity.this, AttendanceActivityS.class);
             startActivity(i);   //start attendance activity
-        }
-        else if(SorT.compareTo("T")==0)
-        {
+        } else if (SorT.compareTo("T") == 0) {
             Intent i = new Intent(MainActivity.this, AttendanceActivityT.class);
             startActivity(i);   //start attendance activity
         }
@@ -351,19 +299,17 @@ public class MainActivity extends Activity
 
     public void onTimeTableClick(View v)    //on time table button click
     {
-        Intent i=new Intent(MainActivity.this,TimeTableActivity.class);
+        Intent i = new Intent(MainActivity.this, TimeTableActivity.class);
         startActivity(i);   //start timetable activity
     }
 
-    public void onClickBug(View v)
-    {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","racy.rohan@gmail.com", null));
+    public void onClickBug(View v) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "racy.rohan@gmail.com", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "College Companion Suggestion or Bug");
         startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
-    public void onClickShare(View v)
-    {
+    public void onClickShare(View v) {
         String message = "https://drive.google.com/file/d/0B9x5a0yDpekhM2xSN2E2STFESXM/view?usp=sharing\n\nor\n\nhttp://10.7.1.125/a/College%20Companion.apk";
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
@@ -379,12 +325,10 @@ public class MainActivity extends Activity
 
     /**
      * Showing Dialog
-     * */
+     */
     @Override
-    protected Dialog onCreateDialog(int id)
-    {
-        switch (id)
-        {
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
             case 0: // we set this to 0
                 pDialog = new ProgressDialog(this);
                 pDialog.setMessage("Loading. Please wait...");
@@ -398,35 +342,32 @@ public class MainActivity extends Activity
         }
     }
 
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
 
         String update_file_name;
-        if(osApi>=21)
-            update_file_name="/data/data/com.blank.rohansharma.collegecompanion/databases/update";
+        if (osApi >= 21)
+            update_file_name = "/data/data/com.blank.rohansharma.collegecompanion/databases/update";
         else
-            update_file_name="/sdcard/update";
-        File tmp=new File(update_file_name);
+            update_file_name = "/sdcard/update";
+        File tmp = new File(update_file_name);
 
-        if(tmp.exists())
+        if (tmp.exists())
             tmp.delete();
     }
 
-    public  void updateApp()
-    {
+    public void updateApp() {
         String update_file_name;
-        if(osApi>=21)
-            update_file_name="/data/data/com.blank.rohansharma.collegecompanion/databases/update";
+        if (osApi >= 21)
+            update_file_name = "/data/data/com.blank.rohansharma.collegecompanion/databases/update";
         else
-            update_file_name="/sdcard/update";
-        File tmp=new File(update_file_name);
-        if(tmp.exists())
-        {
-            Update=SQLiteDatabase.openDatabase(update_file_name,null,SQLiteDatabase.OPEN_READONLY);
-            Cursor c=Update.rawQuery("SELECT * FROM version", null);
+            update_file_name = "/sdcard/update";
+        File tmp = new File(update_file_name);
+        if (tmp.exists()) {
+            Update = SQLiteDatabase.openDatabase(update_file_name, null, SQLiteDatabase.OPEN_READONLY);
+            Cursor c = Update.rawQuery("SELECT * FROM version", null);
             c.moveToFirst();
-            if(c.getString(0).compareTo(version)>0)
+            if (c.getString(0).compareTo(version) > 0)
                 update1.setVisibility(View.VISIBLE);
             c.close();
             Update.close();
@@ -435,24 +376,21 @@ public class MainActivity extends Activity
 
     /**
      * Background Async Task to download file
-     * */
-    class DownloadFileFromURL extends AsyncTask<String, String, String>
-    {
+     */
+    class DownloadFileFromURL extends AsyncTask<String, String, String> {
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
-        protected String doInBackground(String... f_url)
-        {
+        protected String doInBackground(String... f_url) {
             int count;
-            try
-            {
+            try {
                 URL url = new URL(f_url[0]);
                 URLConnection connection = url.openConnection();
                 connection.connect();
                 // download the file
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
-                OutputStream output = new FileOutputStream("sdcard/"+f_url[1]);
+                OutputStream output = new FileOutputStream("sdcard/" + f_url[1]);
                 byte data[] = new byte[1024];
                 while ((count = input.read(data)) != -1)
                     // writing data to file
@@ -463,8 +401,7 @@ public class MainActivity extends Activity
                 output.close();
                 input.close();
 
-                if(osApi>=21)
-                {
+                if (osApi >= 21) {
                     InputStream in = null;
                     OutputStream out = null;
                     String outPath = "/data/data/com.blank.rohansharma.collegecompanion/databases/";
@@ -488,9 +425,7 @@ public class MainActivity extends Activity
                     // delete the original file
                     new File(inPath + inFile).delete();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Log.d("DOWNLOAD", "Error Downloading!");
             }
             return null;
@@ -499,10 +434,9 @@ public class MainActivity extends Activity
         /**
          * After completing background task
          * Dismiss the progress dialog
-         * **/
+         **/
         @Override
-        protected void onPostExecute(String file_url)
-        {
+        protected void onPostExecute(String file_url) {
             updateApp();
         }
     }

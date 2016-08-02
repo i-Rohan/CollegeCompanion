@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blank.rohansharma.collegecompanion"
-    android:installLocation="internalOnly" >
+    package="com.blank.rohansharma.collegecompanion">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -18,41 +17,26 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true">
-        <activity android:name=".IntroActivity"
-            android:theme="@style/IntroTheme0">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".IntroActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/IntroTheme">
-        </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/IntroTheme">
-        </activity>
-        <activity
-            android:name=".TimeTableActivity"
-            android:label="@string/title_activity_time_table"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/IntroTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.blank.rohansharma.collegecompanion.MainActivity" />
-        </activity>
+        <activity android:name=".MainActivity" />
 
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true" >
-        </receiver>
+            android:exported="true" />
 
         <activity
             android:name=".AttendanceActivityS"
-            android:label="@string/title_activity_attendance_activity_s"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/IntroTheme" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.blank.rohansharma.collegecompanion.MainActivity" />
@@ -61,7 +45,7 @@
         <receiver
             android:name=".Receiver0"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="abc" />
             </intent-filter>
@@ -69,7 +53,7 @@
         <receiver
             android:name=".ReceiverChangeProfile"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="changeProfileToNormal" />
             </intent-filter>
@@ -77,12 +61,14 @@
 
         <activity
             android:name=".AttendanceActivityT"
-            android:label="@string/title_activity_attendance_activity_t"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/IntroTheme" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.blank.rohansharma.collegecompanion.MainActivity" />
         </activity>
+        <activity
+            android:name=".TimeTableActivity"
+            android:label="@string/title_activity_time_table" />
     </application>
+
 </manifest>
