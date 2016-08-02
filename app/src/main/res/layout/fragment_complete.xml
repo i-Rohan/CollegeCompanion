@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/sv"
+        <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical">
-
-            <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_height="wrap_content">
 
 
-                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-                    android:id="@+id/main_table"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp" />
+                android:id="@+id/main_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp" />
 
 
-            </HorizontalScrollView>
-        </ScrollView>
+        </HorizontalScrollView>
+    </ScrollView>
 
-        <ProgressBar
-            android:id="@+id/progressBar3"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sv"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:padding="50dp" />
-    </RelativeLayout>
-</ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sv"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="false"
+        android:padding="50dp" />
+
+    <TextView
+        android:id="@+id/updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sv"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:padding="16dp" />
+</RelativeLayout>

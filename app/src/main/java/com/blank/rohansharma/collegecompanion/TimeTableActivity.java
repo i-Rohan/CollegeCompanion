@@ -15,15 +15,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class TimeTableActivity extends AppCompatActivity {
-    public static Context context;
     boolean doubleBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
-
-        context = this;
 
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
